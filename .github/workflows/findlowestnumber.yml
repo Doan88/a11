@@ -1,0 +1,25 @@
+name: Test find_lowest_number.py
+on: [push]
+
+jobs:
+  find_lowest_number_test:
+    name: Find Lowest Number Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Run test case 1 (a file with 10 numbers, one on each line)
+        run: python find_lowest_number.py test_data/test1_input.txt test_data/test1_output.txt
+      - name: Compare expected output to actual in test case 1
+        run: diff test_data/test1_expected.txt test_data/test1_output.txt
+      - name: Run test case 2 (a file with only 1 number)
+        run: python find_lowest_number.py test_data/test2_input.txt test_data/test2_output.txt
+      - name: Compare expected output to actual in test case 2
+        run: diff test_data/test2_expected.txt test_data/test2_output.txt
+      - name: Run test case 3 (a blank file)
+        run: python find_lowest_number.py test_data/test3_input.txt test_data/test3_output.txt
+      - name: Compare expected output to actual in test case 3
+        run: diff test_data/test3_expected.txt test_data/test3_output.txt
